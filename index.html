@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home | TekViz</title>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="lm5 brand-logo">TekViz</a>
+            <ul id="nav-mobile" class="right rm5 hide-on-med-and-down">
+                <li><a class="waves-effect waves-light btn modal-trigger" href="#modal">Sign In</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <main>
+          <!-- Modal Structure -->
+          <div id="modal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+              <h4 class="center-align">Sign In</h4>
+                <a class="block-div waves-effect waves-light btn modal-trigger" href="login.html?user=User">Clients</a>
+                <a class="block-div waves-effect waves-light btn modal-trigger" href="login.html?user=Architect">Architect</a>
+                <a class="block-div waves-effect waves-light btn modal-trigger" href="login.html?user=Admin">Admin</a>
+            </div>
+
+            <div class="modal-footer">
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+            </div>
+          </div>
+    </main>
+
+</body>
+
+<script scr="script.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+       // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+       $('.modal').modal();
+     });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</html>

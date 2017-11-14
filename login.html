@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title id="title">Login | TekViz</title>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="lm5 brand-logo">TekViz</a>
+        </div>
+    </nav>
+
+<div class="container">
+    <div class="row">
+       <div class="login" >
+            <div class="mid-mg header">
+                <h5 id="log">Login</h5>
+            </div>
+
+            <div class="form">
+                <form class=" col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate">
+                            <label for="email" data-error="wrong" data-success="right">Email</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+
+                    <a onclick="signin()" style="display: block;" class="waves-effect waves-light btn">Sign In</a>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+ 
+</body>
+<script>
+    var val;
+    var user;
+    var user_role;
+    let url = document.URL;
+    var temp;
+    
+    
+    function signin(){
+        var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    if (url.endsWith("Architect")){
+        user = "ar_emailID";
+        user_role = "Architect";
+        document.getElementById('log').innerHTML = "Architect Login";
+        document.getElementById('title').innerHTML = "Architect " + document.getElementById('title').innerHTML;
+         val = {
+
+        email: email,
+        password: password,
+        role: user_role
+    
+    };
+    }
+    else if(url.endsWith("User")){
+        user = "ur_emailID";
+        user_role = "User";
+        document.getElementById('log').innerHTML = "Client Login";
+        document.getElementById('title').innerHTML = "Client " + document.getElementById('title').innerHTML;
+        val = {
+
+        email: email,
+        password: password,
+        role: user_role
+    
+    };
+    }
+    else if(url.endsWith("Admin")){
+        user = "ad_emailID";
+        user_role = "Admin";
+        document.getElementById('log').innerHTML = "Admin Login";
+        document.getElementById('title').innerHTML = "Admin " + document.getElementById('title').innerHTML;
+        val = {
+
+        email: email,
+        password: password,
+        role: user_role
+    
+        };
+    }
+    else{
+        alert("Please select appropriate User type");
+        window.location = "/";
+    }
+        fetch("http://localhost:3001/login",{
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(val)
+        })
+        .then(function(response) {
+            return response.json()
+        })
+        .then(function(res){
+            temp = res;
+            if(!res.error){
+                window.location = "/client.html"
+            }
+        });
+    }
+
+
+
+</script>
+<script type="text/javascript" scr="script.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</html>

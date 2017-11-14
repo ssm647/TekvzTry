@@ -1,0 +1,47 @@
+.nav-wrapper{
+    background-color: black;
+}
+
+.lm5{
+    margin-left: 5vw;
+}
+
+.rm5{
+    margin-right: 5vw;
+
+}
+
+.mid-mg{
+    text-align: center;
+}
+
+.login{
+    width:500px;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.nav-content{
+    background-color: darkslategray;
+}
+
+.login-section{
+    margin-top: 20vh;
+    min-width: 300px;
+    width: 30vw;
+    background-color: lightgray;
+    position: fixed;
+    top: 0;
+    left:50%;
+    margin-left:-300px;
+}
+
+#modal{
+    width: 300px;
+    height: 400px;
+}
+
+.block-div{
+    display: block;
+    margin-bottom: 10px;
+}
