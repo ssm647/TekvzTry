@@ -173,4 +173,65 @@ app.post('/user', function (req, res) {
         });
 });
 
+// Authenticate user/admin/architect
+app.post('/login', function(req, res){
+
+    console.log('login is called');
+    var date = new Date();
+    // calculating hash, then compare it to the entry in db
+    // if user found respond with a jwt token
+    //console.log(req.body);
+    var email = req.body.email;
+    var role = req.body.role;
+    let id;
+    var user;
+    var sql;
+    console.log(req.body);
+    if (role == undefined || role == null){
+        return res.status(400).send({ error:true, message: 'Please provide user role' });
+    }
+    else if( role =="Admin"){
+        user = {
+            ad_EmailID : req.body.email
+        }
+        sql = "SELECT * FROM " + role + " WHERE `ad_emailID` = ?";
+    }
+    else if( role == "User"){
+        user = {
+            ur_EmailID : req.body.email
+        }
+        sql = "SELECT * FROM " + role + " WHERE `ur_emailID` = ?";
+    }
+    else if(role == "Architect"){
+        user = {
+            ar_EmailID : req.body.email
+        }
+        console.log(user);
+        sql = "SELECT * FROM " + role + " WHERE `ar_emailID` = ?";
+    }
+    else{
+        return res.status(400).send({ error:true, message: 'Please provide appropriate user role' });
+    }
+
+        //console.log(user);
+
+        con.query(sql, email, function (error, results, rows) {
+            if (error) throw error;
+
+            var cert = fs.readFileSync('private_key.pem');
+                    var user_data = {
+                        email: email,
+                        role: role,
+                    };
+            var token = jwt.sign(user_data, cert, { algorithm: 'RS256'});
+            var hash = bcrypt.compareSync(req.body.password, results[0].password);
+            if (hash){
+                return res.send({ error: false,token: token, message: 'Login successful' });
+            }
+            else{
+                return res.send({ error: true, message: 'Login failed' });
+            }
+        });
+});
+
 app.listen(process.env.PORT || 3001);
